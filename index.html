@@ -2,23 +2,65 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Open-source self-hosted status page SaaS for startups and agencies.">
   <title>StatusWise — Self-Hosted Status Pages</title>
-  <meta name="description" content="Open-source status page SaaS for startups and agencies.">
   <link rel="icon" href="favicon.ico">
   <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 50px auto; }
-    h1 { color: #FF6600; }
-    .cta { margin: 30px 0; }
+    body {
+      font-family: system-ui, sans-serif;
+      background-color: #fafafa;
+      color: #333;
+      max-width: 700px;
+      margin: 50px auto;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #FF6600;
+      margin-bottom: 10px;
+    }
+    .cta {
+      margin: 30px 0;
+    }
+    a.button {
+      display: inline-block;
+      background: #FF6600;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.2s ease;
+    }
+    a.button:hover {
+      background: #e05500;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #777;
+    }
   </style>
 </head>
 <body>
   <h1>StatusWise</h1>
-  <p>Open-Source Self-Hosted Status Page SaaS. <br> Private or public status pages in minutes.</p>
+  <p><strong>Open-Source Self-Hosted Status Page SaaS</strong></p>
+  <p>Launch beautiful public or private status pages in minutes. Fully open-source, privacy-first, developer-friendly.</p>
+
   <div class="cta">
-    <a href="https://github.com/StatusWise/statuswise" target="_blank">View on GitHub</a><br><br>
-    <a href="mailto:statuswisedev@gmail.com">Join Early Access</a>
+    <a href="https://github.com/StatusWise/statuswise" target="_blank" class="button">View on GitHub</a>
   </div>
-  <p><small>MIT Licensed — © 2025</small></p>
+
+  <div class="cta">
+    <a href="mailto:statuswisedev@gmail.com" class="button">Join Early Access</a>
+  </div>
+
+  <p>🔒 GDPR-Friendly • 🚀 SaaS Hosting Available • 💳 Starts at $5/mo</p>
+
+  <footer>
+    MIT Licensed — © 2025 StatusWise
+  </footer>
 </body>
 </html>
-
