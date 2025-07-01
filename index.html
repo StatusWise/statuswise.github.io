@@ -7,60 +7,294 @@
   <title>StatusWise — Self-Hosted Status Pages</title>
   <link rel="icon" href="favicon.ico">
   <style>
+    /* StatusWise Design System Variables */
+    :root {
+      /* Background Colors */
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      
+      /* Border Colors */
+      --border-primary: #475569;
+      --border-secondary: #334155;
+      
+      /* Text Colors */
+      --text-primary: #f1f5f9;
+      --text-secondary: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-disabled: #64748b;
+      
+      /* Blue (Primary Action) */
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      
+      /* Status Colors */
+      --success: #10b981;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --info: #06b6d4;
+      
+      /* Typography Scale */
+      --text-xs: 0.75rem;
+      --text-sm: 0.875rem;
+      --text-base: 1rem;
+      --text-lg: 1.125rem;
+      --text-xl: 1.25rem;
+      --text-2xl: 1.875rem;
+      
+      /* Font Weights */
+      --font-normal: 400;
+      --font-medium: 500;
+      --font-semibold: 600;
+      --font-bold: 700;
+      
+      /* Spacing Scale */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: system-ui, sans-serif;
-      background-color: #fafafa;
-      color: #333;
-      max-width: 700px;
-      margin: 50px auto;
-      padding: 20px;
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+      min-height: 100vh;
     }
-    h1 {
-      font-size: 2.5em;
-      color: #FF6600;
-      margin-bottom: 10px;
+
+    .container {
+      max-width: 48rem;
+      margin: 0 auto;
+      padding: var(--space-8) var(--space-4);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .cta {
-      margin: 30px 0;
+
+    .page-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      text-align: center;
     }
-    a.button {
-      display: inline-block;
-      background: #FF6600;
-      color: white;
-      padding: 12px 24px;
-      border-radius: 8px;
+
+    .subtitle {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-4);
+      text-align: center;
+    }
+
+    .description {
+      font-size: var(--text-base);
+      color: var(--text-secondary);
+      text-align: center;
+      margin-bottom: var(--space-8);
+      max-width: 42rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-8);
+    }
+
+    @media (min-width: 640px) {
+      .cta-group {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    .btn-primary {
+      background-color: var(--blue-500);
+      color: #ffffff;
+      border: 1px solid var(--blue-500);
+      padding: var(--space-3) var(--space-6);
+      border-radius: 0.375rem;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
       text-decoration: none;
-      font-weight: bold;
-      transition: background 0.2s ease;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
     }
-    a.button:hover {
-      background: #e05500;
+
+    .btn-primary:hover {
+      background-color: var(--blue-600);
+      border-color: var(--blue-600);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
     }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-primary);
+      padding: var(--space-3) var(--space-6);
+      border-radius: 0.375rem;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border-primary);
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-6);
+      margin-bottom: var(--space-8);
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-1) var(--space-3);
+      border-radius: 9999px;
+      font-size: var(--text-xs);
+      font-weight: var(--font-medium);
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .badge-success {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: var(--success);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .badge-info {
+      background-color: rgba(6, 182, 212, 0.1);
+      color: var(--info);
+      border: 1px solid rgba(6, 182, 212, 0.2);
+    }
+
+    .badge-warning {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: var(--warning);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
     footer {
-      margin-top: 40px;
-      font-size: 0.9em;
-      color: #777;
+      text-align: center;
+      font-size: var(--text-sm);
+      color: var(--text-muted);
+      margin-top: var(--space-8);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-secondary);
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+      .container {
+        padding: var(--space-6) var(--space-4);
+      }
+      
+      .page-title {
+        font-size: var(--text-xl);
+      }
+      
+      .subtitle {
+        font-size: var(--text-base);
+      }
+      
+      .features {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>StatusWise</h1>
-  <p><strong>Open-Source Self-Hosted Status Page SaaS</strong></p>
-  <p>Launch beautiful public or private status pages in minutes. Fully open-source, privacy-first, developer-friendly.</p>
+  <div class="container animate-fade-in">
+    <h1 class="page-title">StatusWise</h1>
+    <p class="subtitle">Open-Source Self-Hosted Status Page SaaS</p>
+    <p class="description">
+      Launch beautiful public or private status pages in minutes. Fully open-source, 
+      privacy-first, developer-friendly solution for startups and agencies.
+    </p>
 
-  <div class="cta">
-    <a href="https://github.com/StatusWise/statuswise" target="_blank" class="button">View on GitHub</a>
+    <div class="cta-group">
+      <a href="https://github.com/StatusWise/statuswise" target="_blank" class="btn-primary">
+        View on GitHub
+      </a>
+      <a href="mailto:statuswisedev@gmail.com" class="btn-secondary">
+        Join Early Access
+      </a>
+    </div>
+
+    <div class="features">
+      <div class="feature">
+        <span class="badge badge-success">🔒 GDPR-Friendly</span>
+      </div>
+      <div class="feature">
+        <span class="badge badge-info">🚀 SaaS Hosting Available</span>
+      </div>
+      <div class="feature">
+        <span class="badge badge-warning">💳 Starts at $5/mo</span>
+      </div>
+    </div>
+
+    <footer>
+      MIT Licensed — © 2025 StatusWise
+    </footer>
   </div>
-
-  <div class="cta">
-    <a href="mailto:statuswisedev@gmail.com" class="button">Join Early Access</a>
-  </div>
-
-  <p>🔒 GDPR-Friendly • 🚀 SaaS Hosting Available • 💳 Starts at $5/mo</p>
-
-  <footer>
-    MIT Licensed — © 2025 StatusWise
-  </footer>
 </body>
 </html>
